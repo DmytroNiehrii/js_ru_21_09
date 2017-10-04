@@ -3,15 +3,29 @@ import Comment from './Comment'
 import PropTypes from 'prop-types'
 import toggleOpen from '../decorators/toggleOpen'
 
-function CommentList(props) {
-    const {comments, isOpen, toggleOpen} = props
-    const text = isOpen ? 'hide comments' : 'show comments'
-    return (
-        <div>
-            <button onClick={toggleOpen}>{text}</button>
-            {getBody(props)}
-        </div>
-    )
+class CommentList extends Component {
+    componentDidMount() {
+        console.log('---', 'mounted')
+    }
+
+    componentWillUnmount() {
+        console.log('---', 'unmounting')
+    }
+
+    componentWillReceiveProps() {
+        console.log('---', 'updating')
+    }
+
+    render() {
+        const {comments, isOpen, toggleOpen} = this.props
+        const text = isOpen ? 'hide comments' : 'show comments'
+        return (
+            <div>
+                <button onClick={toggleOpen}>{text}</button>
+                {getBody(this.props)}
+            </div>
+        )
+    }
 }
 
 function getBody(props) {
